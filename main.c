@@ -131,13 +131,18 @@ void init_data(struct s_data *data){
 void drawRays(struct s_data *data){
     
     int i = -1;
-    printf("number rays = %d\n", data->p.raysNumber);
+    double limit;
+    double tmp;
     data->p.rayAngle = data->p.rotationAngle - (data->p.fieldAngle / 2);
-    while (++i < 33){
+    tmp = data->p.rayAngle * (180 / M_PI);
+    limit = data->p.fieldAngle * (180 / M_PI) + tmp;
+    while (++i < 60){
         data->p.rayX = data->p.pos_x + cos(data->p.rayAngle) * 150;
         data->p.rayY = data->p.pos_y + sin(data->p.rayAngle) * 150;
         DDA(data, 551);
-        data->p.rayAngle += 2 * (M_PI / 180);
+        printf("Angle ray = %f\n", data->p.rayAngle * (180 / M_PI));
+        printf("FOV angle = %f\n", ((data->p.fieldAngle) * (180 / M_PI)) + (tmp * (180 / M_PI)));
+        data->p.rayAngle += 1 * (M_PI / 180);
     }
 }
 
