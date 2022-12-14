@@ -120,11 +120,11 @@ void init_data(struct s_data *data){
     data->img.width = 30;
     data->mlx_ptr = mlx_init();
     data->win_ptr = mlx_new_window(data->mlx_ptr, data->win_width, data->win_hight, "test");
-    data->img.ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./pics/y.xpm", &data->img.width, &data->img.hight);
+    data->img.ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./pics/g.xpm", &data->img.width, &data->img.hight);
     data->img.dataAdress = (int *)mlx_get_data_addr(data->img.ptr, &data->img.bpp, &data->img.size_line, &data->img.endian);
-    data->img2.ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./pics/n.xpm", &data->img.width, &data->img.hight);
+    data->img2.ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./pics/w.xpm", &data->img.width, &data->img.hight);
     data->img2.dataAdress = (int *)mlx_get_data_addr(data->img2.ptr, &data->img2.bpp, &data->img2.size_line, &data->img2.endian);
-    data->img3.ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./pics/j.xpm", &data->img.width, &data->img.hight);
+    data->img3.ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./pics/r.xpm", &data->img.width, &data->img.hight);
     data->img3.dataAdress = (int *)mlx_get_data_addr(data->img3.ptr, &data->img3.bpp, &data->img3.size_line, &data->img3.endian);
 }
 
@@ -140,8 +140,6 @@ void drawRays(struct s_data *data){
         data->p.rayX = data->p.pos_x + cos(data->p.rayAngle) * 150;
         data->p.rayY = data->p.pos_y + sin(data->p.rayAngle) * 150;
         DDA(data, 551);
-        printf("Angle ray = %f\n", data->p.rayAngle * (180 / M_PI));
-        printf("FOV angle = %f\n", ((data->p.fieldAngle) * (180 / M_PI)) + (tmp * (180 / M_PI)));
         data->p.rayAngle += 1 * (M_PI / 180);
     }
 }
