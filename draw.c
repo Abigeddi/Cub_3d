@@ -122,7 +122,7 @@ void DDA(struct s_data *data, int indice)
     double X = data->p.pos_x;
     double Y = data->p.pos_y;
     for (int i = 0; i <= steps; i++) {
-        mlx_pixel_put(data->mlx_ptr, data->win_ptr, X, Y, (65536 * 255 * indice));// put pixel at (X,Y)
+        mlx_pixel_put(data->mlx_ptr, data->win_ptr, X, Y, (0xFEB913));// put pixel at (X,Y)
         X += Xinc; // increment in x at each step
         Y += Yinc; // increment in y at each step // for visualization of line-
                     // generation step by step
