@@ -162,8 +162,8 @@ int wallIsHited(double x, double y, struct s_data *data){
     int iMapX;
     int iMapY;
 
-    // if (x < 0 || x > data->win_width || y < 0 || y > data->win_hight)
-    //     return (5);
+    if (x < 0 || x > data->win_width || y < 0 || y > data->win_hight)
+        return (5);
     iMapX = floor(x / 30);
     iMapY = floor(y / 30);
     if (data->myMap.map[iMapY][iMapX] == '0' || data->myMap.map[iMapY][iMapX] == 'N')
@@ -189,8 +189,6 @@ int main(int ac, char **av)
     free (tmp);
 	if (!check_tab(&data))
 		return (printf("ERROR : invalid map"),exit (1),0);
-    printf ("x = %f\n",data.p.pos_x);
-    printf ("y = %f\n",data.p.pos_y);
     check_width_hight(&data);
     init_data(&data);
     drawMyMap(&data);
@@ -198,8 +196,6 @@ int main(int ac, char **av)
     DDA(&data, 1);
     drawRays(&data);
 
-    // dda_Algo(&data, 1);
-    // dda_Algo(&data, 2);
     mlx_hook(data.win_ptr, 2, 1L<<0, k_hook, &data);
     mlx_hook(data.win_ptr, 3, 1L<<1, release_k_hook, &data);
     mlx_loop(data.mlx_ptr);
