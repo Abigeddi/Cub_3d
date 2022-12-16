@@ -1,5 +1,14 @@
 #include "cub.h"
 
+int close_window(int key, struct s_data *data){
+    if (key == 53)
+    {
+        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+        exit(1);
+    }
+    return (0);
+}
+
 int k_hook(int key, struct s_data *data){
     printf ("%d\n", key);
     double moveStep = 0;
@@ -36,32 +45,30 @@ int k_hook(int key, struct s_data *data){
         printf("move = %f\n", moveStep);
         data->p.newPx = (data->p.pos_x + cos(data->p.rotationAngle) * moveStep);
         data->p.newPy = (data->p.pos_y + sin(data->p.rotationAngle) * moveStep) ;
-        data->p.newPPx = (data->p.newPx + cos(data->p.rotationAngle) * 30);
-        data->p.newPPy = (data->p.newPy + sin(data->p.rotationAngle) * 30) ;
         if (wallIsHited(data->p.newPx, data->p.newPy, data) == 0){
             data->p.pos_x = data->p.newPx;
             data->p.pos_y = data->p.newPy;
         }
+        data->p.newPPx = (data->p.pos_x + cos(data->p.rotationAngle) * 30);
+        data->p.newPPy = (data->p.pos_y + sin(data->p.rotationAngle) * 30) ;
         mlx_clear_window(data->mlx_ptr, data->win_ptr);
         drawMyMap(data);
         circleDraw(data); 
         DDA(data, 2);
         drawRays(data);
 
-        // }
     }
     else if (key == 126){
         data->p.walkDirection = +1;
         moveStep = data->p.walkDirection * data->p.moveSpeed;
         data->p.newPx = (data->p.pos_x + cos(data->p.rotationAngle) * moveStep);
         data->p.newPy = (data->p.pos_y + sin(data->p.rotationAngle) * moveStep) ;
-        data->p.newPPx = (data->p.newPx + cos(data->p.rotationAngle) * 30);
-        data->p.newPPy = (data->p.newPy + sin(data->p.rotationAngle) * 30) ;
-        printf("move = %d\n", wallIsHited(data->p.newPx, data->p.newPy, data));
         if (wallIsHited(data->p.newPx, data->p.newPy, data) == 0){
             data->p.pos_x = data->p.newPx;
             data->p.pos_y = data->p.newPy;
         }
+        data->p.newPPx = (data->p.pos_x + cos(data->p.rotationAngle) * 30);
+        data->p.newPPy = (data->p.pos_y + sin(data->p.rotationAngle) * 30) ;
         mlx_clear_window(data->mlx_ptr, data->win_ptr);
         drawMyMap(data);
         circleDraw(data); 
