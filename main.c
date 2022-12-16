@@ -195,9 +195,10 @@ int main(int ac, char **av)
     circleDraw(&data);
     DDA(&data, 1);
     drawRays(&data);
-
     mlx_hook(data.win_ptr, 2, 1L<<0, k_hook, &data);
     mlx_hook(data.win_ptr, 3, 1L<<1, release_k_hook, &data);
+    mlx_key_hook(data.win_ptr, close_window, &data);
+    // mlx_hook(data.win_ptr, 2, 0, close_window, &data);
     mlx_loop(data.mlx_ptr);
     return (0);
 }
