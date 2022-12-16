@@ -6,7 +6,7 @@
 /*   By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 01:46:54 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/12 23:33:48 by aalazhar         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:02:50 by aalazhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int checkmap_element(struct s_data *data);
 
 int k_hook(int key, struct s_data *data);
 int release_k_hook(int key, struct s_data *data);
+int close_window(int key, struct s_data *data);
 
 // draw
 
