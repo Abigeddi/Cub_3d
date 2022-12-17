@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abigeddi <abigeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 01:46:54 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/12 23:33:48 by aalazhar         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:44:46 by abigeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stddef.h>
+
+#define TILE_SIZE 30 
 
 struct s_player{
     double pos_x;
@@ -59,6 +61,7 @@ typedef struct s_map{
     char    **map;
     int mapWidth;
     int mapHeight;
+    int tile_size;
     int     n;
     int     s;
     int     w;
@@ -68,6 +71,34 @@ typedef struct s_map{
     int     i;
 } t_map;
 
+typedef struct s_ray
+{
+    // int xtile;
+    // int ytile;
+    // int xtylestep;
+    // int ytylestep;
+    // double xintercept;
+    // double yintercept;
+    // long xstep;
+    // long ystep;
+    double distance;
+    int  ray_facingdown;
+    int  ray_facingup;
+    int  ray_facinright;
+    int  ray_facinleft;
+    double horizhitx;
+    double horizhity;
+    double vertichitx;
+    double vertichity;
+    char horizwallcontent;
+    char vertiwallcontent;
+    double verticdistance;
+    double horizdistance;
+    int horizwallhit;
+    int vertiwallhit;
+    int wallhit;
+    
+}t_ray;
 
 struct s_data{
     long double x;
@@ -81,6 +112,8 @@ struct s_data{
     struct s_img img3;
     struct s_player p;
     t_map myMap;
+    struct s_ray ray;
+    
 } t_data;
 
 
@@ -124,7 +157,8 @@ int wallIsHited(double x, double y, struct s_data *data);
 void DDA(struct s_data *data, int indice);
 void DDA2(struct s_data *data, int indice);
 void drawRays(struct s_data *data);
-
+void horizontal_inter(struct s_data *data);
+void vertical_inter(struct s_data *data);
 // libft
 
 int	ft_atoi(const char *str);

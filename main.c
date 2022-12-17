@@ -103,15 +103,16 @@ void init_data(struct s_data *data){
     data->win_width = data->myMap.mapWidth * 30;
     data->win_hight = data->myMap.mapHeight * 30;
     data->p.moveSpeed = 4;
-    data->p.rotationAngle = 2 * M_PI;
-    data->p.newPx = data->p.pos_x + cos(data->p.rotationAngle) * 30;
-    data->p.newPy = data->p.pos_y + sin(data->p.rotationAngle) * 30;
+    // data->p.rotationAngle = 2 * M_PI;
+    data->myMap.tile_size = 30;
+    data->p.newPx = data->p.pos_x + cos(data->p.rotationAngle) * data->myMap.tile_size;
+    data->p.newPy = data->p.pos_y + sin(data->p.rotationAngle) * data->myMap.tile_size;
     
     
     printf ("--x = %f\n",data->p.pos_x);
     printf ("--y = %f\n",data->p.pos_y);
     data->p.fieldAngle = 60 * (M_PI / 180);
-    data->p.rotationSpeed = 4 * (M_PI / 180);
+    data->p.rotationSpeed = 40 * (M_PI / 180);
     data->p.wallStreapWidth = 10;
     data->p.raysNumber = data->win_width / data->p.wallStreapWidth;
     printf("--- %d\n", data->win_width);
@@ -132,10 +133,33 @@ void drawRays(struct s_data *data){
     
     int i = -1;
     printf("number rays = %d\n", data->p.raysNumber);
-    data->p.rayAngle = data->p.rotationAngle - (data->p.fieldAngle / 2);
-    while (++i < 33){
-        data->p.rayX = data->p.pos_x + cos(data->p.rayAngle) * 150;
-        data->p.rayY = data->p.pos_y + sin(data->p.rayAngle) * 150;
+    printf("__---------------------____ROTAION : %f\n", data->p.rotationAngle);
+    data->p.rayAngle = data->p.rotationAngle - (30 * (M_PI / 180));
+    while (++i < data->p.raysNumber){
+
+        vertical_inter(data);
+        horizontal_inter(data);
+        printf("pos p : x = %f && y = %f\n", data->p.pos_x, data->p.pos_y);
+        printf("ver : x = %f && y= %f\n", data->ray.vertichitx, data->ray.vertichity);
+        printf("hor : x = %f && y= %f\n", data->ray.horizhitx, data->ray.horizhity);
+        if (data->ray.horizdistance > data->ray.verticdistance)
+        {
+            data->ray.distance = data->ray.verticdistance;
+            data->p.rayX = data->ray.vertichitx;
+            data->p.rayY = data->ray.vertichity;
+        }
+        else
+            {
+            data->ray.distance = data->ray.horizdistance;
+            data->p.rayX = data->ray.horizhitx;
+            data->p.rayY = data->ray.horizhity;
+        }
+            printf ("-----DISTANCE---%f\n",data->ray.distance );
+        // horizontal_inter(data);
+        // if ()
+        // data->p.rayX = data->p.pos_x + (cos(data->p.rayAngle) * 200);
+        // data->p.rayY = data->p.pos_y + (sin(data->p.rayAngle) * 200);
+
         DDA(data, 551);
         data->p.rayAngle += 2 * (M_PI / 180);
     }

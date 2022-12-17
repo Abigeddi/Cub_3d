@@ -6,11 +6,23 @@
 /*   By: abigeddi <abigeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:15:31 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/13 17:55:17 by abigeddi         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:24:04 by abigeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void fctttttt(struct s_data *data, char c)
+{
+	if (c == 'N')
+		data->p.rotationAngle = (3 * M_PI) / 2;
+	if (c == 'S')
+		data->p.rotationAngle = M_PI / 2;
+	if (c == 'E')
+		data->p.rotationAngle = 0;
+	if (c == 'W')
+		data->p.rotationAngle = M_PI;
+}
 
 int checkmap_element(struct s_data *data)
 {
@@ -30,6 +42,7 @@ int checkmap_element(struct s_data *data)
 			if (data->myMap.map[i][j] == 'N' || data->myMap.map[i][j] == 'S' || data->myMap.map[i][j] == 'W' || data->myMap.map[i][j] == 'E'){
 				data->p.pos_x = (j * 30) + 15;
 				data->p.pos_y = (i * 30) + 15;
+				fctttttt(data, data->myMap.map[i][j]);
 			}
             j++;
         }

@@ -135,6 +135,7 @@ int circleDraw(struct s_data *data){
     int r = 4;
     // printf("width = %f\n", data->p.pos_x);
     // printf("height = %f\n", data->p.pos_y);
+
     while (i < data->win_hight)
     {
         j = 0;
@@ -156,11 +157,11 @@ int drawMyMap(struct s_data *data){
         j = 0;
         while (j < data->myMap.mapWidth){
             if (data->myMap.map[i][j] == '0' || data->myMap.map[i][j] == 'N')
-                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img2.ptr, (data->x + (j * 30)), (data->y + (i * 30)));
+                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img2.ptr, (data->x + (j * data->myMap.tile_size)), (data->y + (i * data->myMap.tile_size)));
             else if (data->myMap.map[i][j] == ' ')
-                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img3.ptr, (data->x + (j * 30)), (data->y + (i * 30)));
+                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img3.ptr, (data->x + (j * data->myMap.tile_size)), (data->y + (i * data->myMap.tile_size)));
             else if (data->myMap.map[i][j] == '1')
-                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, (data->x + (j * 30)), (data->y + (i * 30)));
+                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, (data->x + (j * data->myMap.tile_size)), (data->y + (i * data->myMap.tile_size)));
             j++;
         }
     }

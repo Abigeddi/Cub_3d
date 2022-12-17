@@ -1,7 +1,6 @@
 #include "cub.h"
 
 int k_hook(int key, struct s_data *data){
-    printf ("%d\n", key);
     double moveStep = 0;
 
     if (key == 124){
@@ -15,6 +14,7 @@ int k_hook(int key, struct s_data *data){
         drawMyMap(data);
         circleDraw(data); 
         DDA(data, 1);
+        
         drawRays(data);
     }
     else if (key == 123){
@@ -57,7 +57,6 @@ int k_hook(int key, struct s_data *data){
         data->p.newPy = (data->p.pos_y + sin(data->p.rotationAngle) * moveStep) ;
         data->p.newPPx = (data->p.newPx + cos(data->p.rotationAngle) * 30);
         data->p.newPPy = (data->p.newPy + sin(data->p.rotationAngle) * 30) ;
-        printf("move = %d\n", wallIsHited(data->p.newPx, data->p.newPy, data));
         if (wallIsHited(data->p.newPx, data->p.newPy, data) == 0){
             data->p.pos_x = data->p.newPx;
             data->p.pos_y = data->p.newPy;
