@@ -10,13 +10,14 @@ int close_window(int key, struct s_data *data){
 }
 
 int k_hook(int key, struct s_data *data){
-    printf ("%d\n", key);
+    // printf ("%d\n", key);
     double moveStep = 0;
 
     if (key == 124){
         data->p.turnDirection = 1;
-        data->p.rotationAngle += (4 * (M_PI / 180));
-        data->p.rayAngle += data->p.fieldAngle / data->p.raysNumber;
+        data->p.rotationAngle += (2 * (M_PI / 180));
+        data->p.rayAngle += (2 * (M_PI / 180));
+        // data->p.rayAngle += data->p.fieldAngle / data->p.raysNumber;
         data->p.newPx = data->p.pos_x + cos(data->p.rotationAngle) * 30;
         data->p.newPy = data->p.pos_y + sin(data->p.rotationAngle) * 30;
         // data->p.rayAngle += 2 * (M_PI / 180) * data->p.turnDirection;
@@ -28,8 +29,10 @@ int k_hook(int key, struct s_data *data){
     }
     else if (key == 123){
         data->p.turnDirection = 1;
-        data->p.rotationAngle -= (4 * (M_PI / 180));
-        data->p.rayAngle += data->p.fieldAngle / data->p.raysNumber;
+        data->p.rotationAngle -= (2 * (M_PI / 180));
+        data->p.rayAngle -= (2 * (M_PI / 180));
+        
+        // data->p.rayAngle += data->p.fieldAngle / data->p.raysNumber;
         data->p.newPx = data->p.pos_x + cos(data->p.rotationAngle) * 30;
         data->p.newPy = data->p.pos_y + sin(data->p.rotationAngle) * 30;
         // data->p.rayAngle += 2 * (M_PI / 180) * data->p.turnDirection; 
@@ -42,7 +45,6 @@ int k_hook(int key, struct s_data *data){
     else if (key == 125){
         data->p.walkDirection = -1;
         moveStep = data->p.walkDirection * data->p.moveSpeed;
-        printf("move = %f\n", moveStep);
         data->p.newPx = (data->p.pos_x + cos(data->p.rotationAngle) * moveStep);
         data->p.newPy = (data->p.pos_y + sin(data->p.rotationAngle) * moveStep) ;
         if (wallIsHited(data->p.newPx, data->p.newPy, data) == 0){

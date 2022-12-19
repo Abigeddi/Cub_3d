@@ -103,7 +103,8 @@ void init_data(struct s_data *data){
     data->win_width = data->myMap.mapWidth * 30;
     data->win_hight = data->myMap.mapHeight * 30;
     data->p.moveSpeed = 4;
-    data->p.rotationAngle = 2 * M_PI;
+    data->p.rotationAngle = 0;
+    data->myMap.tile_size = 30;
     data->p.newPx = data->p.pos_x + cos(data->p.rotationAngle) * 30;
     data->p.newPy = data->p.pos_y + sin(data->p.rotationAngle) * 30;
     
@@ -130,19 +131,88 @@ void init_data(struct s_data *data){
 
 void drawRays(struct s_data *data){
     
-    int i = -1;
+    // int i = -1;
     double limit;
     double tmp;
     data->p.rayAngle = data->p.rotationAngle - (data->p.fieldAngle / 2);
     tmp = data->p.rayAngle * (180 / M_PI);
     limit = data->p.fieldAngle * (180 / M_PI) + tmp;
-    while (++i < 60){
-        data->p.rayX = data->p.pos_x + cos(data->p.rayAngle) * 150;
-        data->p.rayY = data->p.pos_y + sin(data->p.rayAngle) * 150;
-        DDA(data, 551);
-        data->p.rayAngle += 1 * (M_PI / 180);
-    }
+    // while (++i < 1){
+    // data->p.rayX = data->p.pos_x + cos(data->p.rayAngle) * 150;
+    // data->p.rayY = data->p.pos_y + sin(data->p.rayAngle) * 150;
+    // while (++i < 30){
+    //     normalizeAngle(data);
+    //     horizontal_intersection(data);
+    //     DDA(data, 551);
+    //     data->p.rayAngle += 0.5 * (M_PI / 180);
+    // }
+    normalizeAngle(data);
+    // horizontal_intersection(data);
+    // printf("***** v_dist =  %f", data->p.v_dist);
+    // printf("***** h_dist =  %f", data->p.h_dist);
+
+    vertical_intersection(data);
+
+
+    // if (data->p.h_dist > data->p.v_dist){
+    //     data->p.rayX = data->p.v_rayx;
+    //     data->p.rayY = data->p.v_rayy;
+    // }
+    // else
+    // {
+    //     data->p.rayX = data->p.h_rayx;
+    //     data->p.rayY = data->p.h_rayy;
+    // }
+    DDA(data, 551);
+    // data->p.rayAngle += 0.5 * (M_PI / 180);
+    // if (indice == 2)
+    //     data->p.rayAngle -= 2 * (M_PI / 180);
+    // else
+    // }
 }
+
+// void drawRays(struct s_data *data){
+    
+//     // int i = -1;
+//     // printf("number rays = %d\n", data->p.raysNumber);
+//     // printf("__---------------------____ROTAION : %f\n", data->p.rotationAngle);
+//     data->p.rayAngle = data->p.rotationAngle - (30 * (M_PI / 180));
+//     printf("Angle rot = %f\n", data->p.rotationAngle * (180 / M_PI));
+//     printf("Angle ray = %f\n", data->p.rayAngle * (180 / M_PI));
+//     // while (++i < 30){
+//     vertical_inter(data);
+//     printf("-----------------\n");
+//     horizontal_inter(data);
+//     // printf("pos p : x = %f && y = %f\n", data->p.pos_x, data->p.pos_y);
+//     // printf("ver : x = %f && y= %f\n", data->ray.vertichitx, data->ray.vertichity);
+//     // printf("hor : x = %f && y= %f\n", data->ray.horizhitx, data->ray.horizhity);
+//     if (data->ray.horizdistance > data->ray.verticdistance)
+//     {
+//         data->ray.distance = data->ray.verticdistance;
+//         data->p.rayX = data->ray.vertichitx;
+//         data->p.rayY = data->ray.vertichity;
+//     }
+//     else
+//         {
+//         data->ray.distance = data->ray.horizdistance;
+//         data->p.rayX = data->ray.horizhitx;
+//         data->p.rayY = data->ray.horizhity;
+//     }
+//     printf("xInter = %f\n", data->p.rayX);
+//     printf("yInter = %f\n", data->p.rayY);
+//     printf("distan = %f\n", data->ray.distance);
+
+//         // printf ("-----DISTANCE---%f\n",data->ray.distance );
+//     // horizontal_inter(data);
+//     // if ()
+//     // data->p.rayX = data->p.pos_x + (cos(data->p.rayAngle) * 200);
+//     // data->p.rayY = data->p.pos_y + (sin(data->p.rayAngle) * 200);
+//     DDA(data, 5);
+//     // printf(" drawing rays -- %d\n", i);
+//     // printf(" vertical inet -- \n");
+//     // data->p.rayAngle += 2 * (M_PI / 180);
+//     // }
+// }
 
 void check_width_hight(struct s_data *data){
     int i = 0;
@@ -162,12 +232,16 @@ int wallIsHited(double x, double y, struct s_data *data){
     int iMapX;
     int iMapY;
 
-    if (x < 0 || x > data->win_width || y < 0 || y > data->win_hight)
-        return (5);
+    // if ((x < 0 && x > data->win_width) || y < 0 || y > data->win_hight)
     iMapX = floor(x / 30);
     iMapY = floor(y / 30);
-    if (data->myMap.map[iMapY][iMapX] == '0' || data->myMap.map[iMapY][iMapX] == 'N')
-        return (0);
+    if (data->p.rayAngle > M_PI / 2 && data->p.rayAngle < (270 * (M_PI / 180)))
+        iMapX = (int) ((x  / 30) - 1);
+    //     return (5);
+    if (x >= 0 && x <= data->win_width && y >= 0 && y <= data->win_hight){
+        if (data->myMap.map[iMapY][iMapX] == '0' || data->myMap.map[iMapY][iMapX] == 'N')
+            return (0);
+    }
     return (2);
 }
 

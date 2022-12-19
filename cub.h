@@ -6,7 +6,7 @@
 /*   By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 01:46:54 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/15 18:02:50 by aalazhar         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:48:39 by aalazhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ struct s_player{
     double newPPy;
     double rayX;
     double rayY;
+    double h_dist;
+    double v_dist;
+    double distance;
+    double v_rayx;
+    double v_rayy;
+    double h_rayx;
+    double h_rayy;
+
 };
 
 struct s_img{
@@ -57,6 +65,7 @@ struct s_img{
 typedef struct s_map{
     char    **componements;
     char    **map;
+    int tile_size;
     int mapWidth;
     int mapHeight;
     int     n;
@@ -68,6 +77,34 @@ typedef struct s_map{
     int     i;
 } t_map;
 
+typedef struct s_ray
+{
+    // int xtile;
+    // int ytile;
+    // int xtylestep;
+    // int ytylestep;
+    // double xintercept;
+    // double yintercept;
+    // long xstep;
+    // long ystep;
+    double distance;
+    int  ray_facingdown;
+    int  ray_facingup;
+    int  ray_facinright;
+    int  ray_facinleft;
+    double horizhitx;
+    double horizhity;
+    double vertichitx;
+    double vertichity;
+    char horizwallcontent;
+    char vertiwallcontent;
+    double verticdistance;
+    double horizdistance;
+    int horizwallhit;
+    int vertiwallhit;
+    int wallhit;
+    
+}t_ray;
 
 struct s_data{
     long double x;
@@ -81,6 +118,7 @@ struct s_data{
     struct s_img img3;
     struct s_player p;
     t_map myMap;
+    t_ray ray;
 } t_data;
 
 
@@ -125,6 +163,8 @@ int wallIsHited(double x, double y, struct s_data *data);
 void DDA(struct s_data *data, int indice);
 void DDA2(struct s_data *data, int indice);
 void drawRays(struct s_data *data);
+// void horizontal_inter(struct s_data *data);
+// void vertical_inter(struct s_data *data);
 
 // libft
 
@@ -133,4 +173,9 @@ int	ft_isdigit(int c);
 int	ft_strncmp(const char *s1,const char *s2, int n);
 void	ft_putendl_fd(char *s, int fd);
 size_t	ft_strlen(const char *s);
+
+void horizontal_intersection(struct s_data *data);
+void vertical_intersection(struct s_data *data);
+double distancebetweenpoints(double x1, double y1, double x2, double y2);
+void normalizeAngle(struct s_data *data);
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abigeddi <abigeddi@student.42.fr>          +#+  +:+       +#+         #
+#    By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 17:45:50 by abigeddi          #+#    #+#              #
-#    Updated: 2022/12/13 18:18:44 by abigeddi         ###   ########.fr        #
+#    Updated: 2022/12/18 17:47:13 by aalazhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = 	main.c \
 		get_next_line_utils.c \
 		get_next_line.c \
 		hooks.c \
+		intersect.c 
 
 
 OBJ = $(SRC:%.c=%.o)
