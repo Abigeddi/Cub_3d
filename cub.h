@@ -6,7 +6,7 @@
 /*   By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 01:46:54 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/19 18:48:39 by aalazhar         ###   ########.fr       */
+/*   Updated: 2022/12/19 21:55:32 by aalazhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,4 +178,5 @@ void horizontal_intersection(struct s_data *data);
 void vertical_intersection(struct s_data *data);
 double distancebetweenpoints(double x1, double y1, double x2, double y2);
 void normalizeAngle(struct s_data *data);
+void ray_facing(struct s_data *data);
 #endif

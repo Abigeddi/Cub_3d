@@ -146,12 +146,27 @@ void drawRays(struct s_data *data){
     //     DDA(data, 551);
     //     data->p.rayAngle += 0.5 * (M_PI / 180);
     // }
+    ray_facing(data);
     normalizeAngle(data);
     // horizontal_intersection(data);
     // printf("***** v_dist =  %f", data->p.v_dist);
     // printf("***** h_dist =  %f", data->p.h_dist);
 
     vertical_intersection(data);
+    data->ray.horizdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.horizhitx,data->ray.horizhity);
+    data->ray.verticdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.vertichitx,data->ray.vertichity);
+     if (data->ray.horizdistance > data->ray.verticdistance)
+    {
+        data->ray.distance = data->ray.verticdistance;
+        data->p.rayX = data->ray.vertichitx;
+        data->p.rayY = data->ray.vertichity;
+    }
+    else
+        {
+        data->ray.distance = data->ray.horizdistance;
+        data->p.rayX = data->ray.horizhitx;
+        data->p.rayY = data->ray.horizhity;
+    }
 
 
     // if (data->p.h_dist > data->p.v_dist){
@@ -235,8 +250,8 @@ int wallIsHited(double x, double y, struct s_data *data){
     // if ((x < 0 && x > data->win_width) || y < 0 || y > data->win_hight)
     iMapX = floor(x / 30);
     iMapY = floor(y / 30);
-    if (data->p.rayAngle > M_PI / 2 && data->p.rayAngle < (270 * (M_PI / 180)))
-        iMapX = (int) ((x  / 30) - 1);
+    // if (data->p.rayAngle > M_PI / 2 && data->p.rayAngle < (270 * (M_PI / 180)))
+    //     iMapX = (int) ((x  / 30) - 1);
     //     return (5);
     if (x >= 0 && x <= data->win_width && y >= 0 && y <= data->win_hight){
         if (data->myMap.map[iMapY][iMapX] == '0' || data->myMap.map[iMapY][iMapX] == 'N')
