@@ -42,7 +42,7 @@ void ray_facing(struct s_data *data)
 }
 
 void upRight_vIntersect(struct s_data *data){
-    data->interV.firstX = floor(data->p.pos_x / 30) * 30 + 1;
+    data->interV.firstX = floor(data->p.pos_x / 30) * 30  + 30 + 1;
     data->interV.firstY = data->p.pos_y + ((data->interV.firstX - data->p.pos_x) * tan(data->p.rayAngle)) - 1;
     data->interV.xstep = 30;
     data->interV.ystep = data->interV.xstep * tan(data->p.rayAngle);
@@ -76,7 +76,7 @@ void downRight_vIntersect(struct s_data *data){
     data->p.v_rayy = data->interV.yIntersect;
 }
 void downLeft_vIntersect(struct s_data *data){
-    data->interV.firstX = (floor(data->p.pos_x / 30) * 30) + 30 - 1;
+    data->interV.firstX = (floor(data->p.pos_x / 30) * 30) - 1;
     data->interV.firstY = data->p.pos_y + ((data->interV.firstX - data->p.pos_x) * tan(data->p.rayAngle)) + 1;
     data->interV.xstep = -30;
     data->interV.ystep = data->interV.xstep * tan(data->p.rayAngle);
@@ -91,6 +91,10 @@ void downLeft_vIntersect(struct s_data *data){
     data->p.v_rayx = data->interV.xIntersect;
     data->p.v_rayy = data->interV.yIntersect;
     data->p.v_dist = distancebetweenpoints(data->p.pos_x, data->p.pos_y, data->p.v_rayx, data->p.v_rayy);
+    printf("vertical -------- \n");
+
+    printf("v ray x = %f \n", data->interV.xIntersect);
+    printf("v ray y = %f \n", data->interV.yIntersect);
 }
 void upLeft_vIntersect(struct s_data *data){
     data->interV.firstX = (floor(data->p.pos_x / 30) * 30) - 1;

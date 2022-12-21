@@ -109,8 +109,8 @@ void init_data(struct s_data *data){
     data->p.newPy = data->p.pos_y + sin(data->p.rotationAngle) * 30;
     
     
-    printf ("--x = %f\n",data->p.pos_x);
-    printf ("--y = %f\n",data->p.pos_y);
+    // printf ("--x = %f\n",data->p.pos_x);
+    // printf ("--y = %f\n",data->p.pos_y);
     data->p.fieldAngle = 60 * (M_PI / 180);
     data->p.rotationSpeed = 4 * (M_PI / 180);
     data->p.wallStreapWidth = 10;
@@ -165,6 +165,7 @@ void drawRays(struct s_data *data){
         }
         // printf("h_dist = %f\n", data->p.h_dist);
         printf("v_dist = %f\n", data->p.v_dist);
+        printf("v_dist = %f\n", data->p.h_dist);
     // data->ray.horizdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.horizhitx,data->ray.horizhity);
     // data->ray.verticdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.vertichitx,data->ray.vertichity);
     //  if (data->ray.horizdistance > data->ray.verticdistance)

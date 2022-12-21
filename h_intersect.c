@@ -52,6 +52,10 @@ void downLeft_hIntersect(struct s_data *data){
     data->p.h_dist = distancebetweenpoints(data->p.pos_x, data->p.pos_y, data->interH.xIntersect, data->interH.yIntersect);
     data->p.h_rayx = data->interH.xIntersect;
     data->p.h_rayy = data->interH.yIntersect;
+    printf("horizontal -------- \n");
+
+    printf("h ray x = %f \n", data->interH.xIntersect);
+    printf("h ray y = %f \n", data->interH.yIntersect);
 
 }
 
