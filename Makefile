@@ -6,7 +6,7 @@
 #    By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 17:45:50 by abigeddi          #+#    #+#              #
-#    Updated: 2022/12/18 17:47:13 by aalazhar         ###   ########.fr        #
+#    Updated: 2022/12/20 23:25:11 by aalazhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = 	main.c \
 		get_next_line_utils.c \
 		get_next_line.c \
 		hooks.c \
-		intersect.c 
+		v_intersect.c \
+		h_intersect.c 
 
 
 OBJ = $(SRC:%.c=%.o)

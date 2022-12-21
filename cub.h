@@ -6,7 +6,7 @@
 /*   By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 01:46:54 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/19 21:55:32 by aalazhar         ###   ########.fr       */
+/*   Updated: 2022/12/20 23:24:47 by aalazhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ struct s_player{
     double h_rayx;
     double h_rayy;
 
+};
+
+struct s_inter{
+    double xstep;
+    double ystep;
+    double xIntersect;
+    double yIntersect;
+    double firstX;
+    double firstY;
 };
 
 struct s_img{
@@ -119,6 +128,8 @@ struct s_data{
     struct s_player p;
     t_map myMap;
     t_ray ray;
+    struct s_inter interH;
+    struct s_inter interV;
 } t_data;
 
 
@@ -177,6 +188,20 @@ size_t	ft_strlen(const char *s);
 void horizontal_intersection(struct s_data *data);
 void vertical_intersection(struct s_data *data);
 double distancebetweenpoints(double x1, double y1, double x2, double y2);
-void normalizeAngle(struct s_data *data);
+double normalizeAngle(double angle);
 void ray_facing(struct s_data *data);
+
+// horiz intersection
+
+void upRight_hIntersect(struct s_data *data);
+void downRight_hIntersect(struct s_data *data);
+void downLeft_hIntersect(struct s_data *data);
+void upLeft_hIntersect(struct s_data *data);
+
+// verti intersection
+
+void upRight_vIntersect(struct s_data *data);
+void downRight_vIntersect(struct s_data *data);
+void downLeft_vIntersect(struct s_data *data);
+void upLeft_vIntersect(struct s_data *data);
 #endif

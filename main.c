@@ -131,7 +131,7 @@ void init_data(struct s_data *data){
 
 void drawRays(struct s_data *data){
     
-    // int i = -1;
+    int i = -1;
     double limit;
     double tmp;
     data->p.rayAngle = data->p.rotationAngle - (data->p.fieldAngle / 2);
@@ -140,33 +140,45 @@ void drawRays(struct s_data *data){
     // while (++i < 1){
     // data->p.rayX = data->p.pos_x + cos(data->p.rayAngle) * 150;
     // data->p.rayY = data->p.pos_y + sin(data->p.rayAngle) * 150;
-    // while (++i < 30){
-    //     normalizeAngle(data);
-    //     horizontal_intersection(data);
-    //     DDA(data, 551);
-    //     data->p.rayAngle += 0.5 * (M_PI / 180);
-    // }
     ray_facing(data);
-    normalizeAngle(data);
-    // horizontal_intersection(data);
-    // printf("***** v_dist =  %f", data->p.v_dist);
-    // printf("***** h_dist =  %f", data->p.h_dist);
+    
+    while (++i < 30){
+        vertical_intersection(data);
 
-    vertical_intersection(data);
-    data->ray.horizdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.horizhitx,data->ray.horizhity);
-    data->ray.verticdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.vertichitx,data->ray.vertichity);
-     if (data->ray.horizdistance > data->ray.verticdistance)
-    {
-        data->ray.distance = data->ray.verticdistance;
-        data->p.rayX = data->ray.vertichitx;
-        data->p.rayY = data->ray.vertichity;
-    }
-    else
-        {
-        data->ray.distance = data->ray.horizdistance;
-        data->p.rayX = data->ray.horizhitx;
-        data->p.rayY = data->ray.horizhity;
-    }
+        horizontal_intersection(data);
+        if (data->p.v_dist > data->p.h_dist){
+            data->p.rayY = data->p.h_rayy;
+            data->p.rayX = data->p.h_rayx;
+            // if (data->p.h_rayy == 0){
+            //     data->p.rayY = data->p.h_rayy + 30;
+            // }
+        }
+        else {
+            data->p.rayX = data->p.v_rayx;
+            data->p.rayY = data->p.v_rayy;
+            // if (data->p.v_rayx < data->p.pos_x)
+            //     data->p.rayX = data->p.v_rayx + 30;
+        }
+
+            DDA(data, 551);
+            data->p.rayAngle += 2 * (M_PI / 180);
+        }
+        // printf("h_dist = %f\n", data->p.h_dist);
+        printf("v_dist = %f\n", data->p.v_dist);
+    // data->ray.horizdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.horizhitx,data->ray.horizhity);
+    // data->ray.verticdistance = distancebetweenpoints(data->p.pos_x,data->p.pos_y,data->ray.vertichitx,data->ray.vertichity);
+    //  if (data->ray.horizdistance > data->ray.verticdistance)
+    // {
+    //     data->ray.distance = data->ray.verticdistance;
+    //     data->p.rayX = data->ray.vertichitx;
+    //     data->p.rayY = data->ray.vertichity;
+    // }
+    // else
+    //     {
+    //     data->ray.distance = data->ray.horizdistance;
+    //     data->p.rayX = data->ray.horizhitx;
+    //     data->p.rayY = data->ray.horizhity;
+    // }
 
 
     // if (data->p.h_dist > data->p.v_dist){
@@ -178,7 +190,7 @@ void drawRays(struct s_data *data){
     //     data->p.rayX = data->p.h_rayx;
     //     data->p.rayY = data->p.h_rayy;
     // }
-    DDA(data, 551);
+    // DDA(data, 551);
     // data->p.rayAngle += 0.5 * (M_PI / 180);
     // if (indice == 2)
     //     data->p.rayAngle -= 2 * (M_PI / 180);
