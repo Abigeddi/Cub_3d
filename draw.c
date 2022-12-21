@@ -1,95 +1,5 @@
 #include "cub.h"
 
-// void dda_Algo(struct s_data *data, int indice){
-
-//     double dx;
-//     double dy;
-//     double choice;
-//     double y2 = 0;
-//     double x2 = 0;
-//     double var; 
-//     double var2; 
-//     double step = 0;
-//     int i = -1;
-
-//     if (indice == 1)
-//         choice = data->p.rotationAngle;
-//     else
-//         choice = data->p.rayAngle;
-
-//     x2 = data->p.pos_x + cos(choice);
-//     y2 = data->p.pos_y + sin(choice);
-//     dx = fabs(x2 - data->p.pos_x);
-//     dy = fabs(y2 - data->p.pos_y);
-//     if (dx >= dy)
-//         step = dx;
-//     else
-//         step = dy;
-//     var = dx / step;
-//     var2 = dy / step;
-//     double inc_x = data->p.pos_x;
-//     double inc_y = data->p.pos_y;
-//     printf("%f | %f", inc_x, inc_y);
-//     if (x2 == inc_x && y2 < inc_y)
-//     {
-//         while (++i < 47){
-//             mlx_pixel_put(data->mlx_ptr, data->win_ptr, inc_x, inc_y, (65536 * 255));
-//             // inc_x += var;
-//             inc_y -= var2;
-//         }
-//     }
-//     else if (x2 == inc_x && y2 > inc_y)
-//     {
-//         while (++i < 47){
-//             mlx_pixel_put(data->mlx_ptr, data->win_ptr, inc_x, inc_y, (65536 * 255));
-//             // inc_x += var;
-//             inc_y += var2;
-//         }
-//     }
-//     else if (x2 > inc_x && y2 == inc_y)
-//     {
-//         while (++i < 47){
-//             mlx_pixel_put(data->mlx_ptr, data->win_ptr, inc_x, inc_y, (65536 * 255));
-//             inc_x += var;
-//             // inc_y -= var2;
-//         }
-//     }
-//     else if (x2 > inc_x && y2 > inc_y)
-//     {
-//         while (++i < 47){
-//             mlx_pixel_put(data->mlx_ptr, data->win_ptr, inc_x, inc_y, (65536 * 255));
-//             inc_x += var;
-//             inc_y += var2;
-//         }
-//     }
-//     else if (x2 < inc_x && y2 > inc_y)
-//     {
-//         while (++i < 47){
-//             mlx_pixel_put(data->mlx_ptr, data->win_ptr, inc_x, inc_y, (65536 * 255));
-//             inc_x -= var;
-//             inc_y += var2;
-
-//         }
-//     }
-//     else if (x2 < inc_x && y2 < inc_y)
-//     {
-//         while (++i < 47){
-//             mlx_pixel_put(data->mlx_ptr, data->win_ptr, inc_x, inc_y, (65536 * 255));
-//             inc_x -= var;
-//             inc_y -= var2;
-//         }
-//     }
-//     else if (x2 > inc_x && y2 < inc_y)
-//     {
-//         while (++i < 47){
-//             mlx_pixel_put(data->mlx_ptr, data->win_ptr, inc_x, inc_y, (65536 * 255));
-//             inc_x += var;
-//             inc_y -= var2;
-//         }
-//     }
-//     // data->p.rotationAngle += 15 *(M_PI / 180); 
-// }
-
 void DDA(struct s_data *data, int indice)
 {
     int dx;
@@ -152,16 +62,22 @@ int circleDraw(struct s_data *data){
 int drawMyMap(struct s_data *data){
     int j = 0;
     int i = -1;
+
+    double win_x;
+    double win_y;
+
+    win_x = 0;
+    win_y = 0;
     
     while (++i < data->myMap.mapHeight){
         j = 0;
         while (j < data->myMap.mapWidth){
-            if (data->myMap.map[i][j] == '0' || data->myMap.map[i][j] == 'N')
-                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img2.ptr, (data->x + (j * 30)), (data->y + (i * 30)));
+            if (data->myMap.map[i][j] == '0' || data->myMap.map[i][j] == 'N' || data->myMap.map[i][j] == 'S' || data->myMap.map[i][j] == 'E' || data->myMap.map[i][j] == 'W')
+                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img2.ptr, (win_x + (j * TILE_SIZE)), (win_y + (i * TILE_SIZE)));
             else if (data->myMap.map[i][j] == ' ')
-                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img3.ptr, (data->x + (j * 30)), (data->y + (i * 30)));
+                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img3.ptr, (win_x + (j * TILE_SIZE)), (win_y + (i * TILE_SIZE)));
             else if (data->myMap.map[i][j] == '1')
-                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, (data->x + (j * 30)), (data->y + (i * 30)));
+                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, (win_x + (j * TILE_SIZE)), (win_y + (i * TILE_SIZE)));
             j++;
         }
     }

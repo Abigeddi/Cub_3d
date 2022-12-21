@@ -1,9 +1,9 @@
 #include "cub.h"
 
 void upRight_hIntersect(struct s_data *data){
-    data->interH.firstY = floor(data->p.pos_y / 30) * 30 - 1;
+    data->interH.firstY = floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE - 1;
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) + 1;
-    data->interH.ystep = -30;
+    data->interH.ystep = -TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
     if (data->interH.xstep < 0)
         data->interH.xstep *= -1;
@@ -19,9 +19,9 @@ void upRight_hIntersect(struct s_data *data){
 }
 
 void downRight_hIntersect(struct s_data *data){
-    data->interH.firstY = (floor(data->p.pos_y / 30) * 30) + 30 + 1;
+    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) + TILE_SIZE + 1;
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) + 1;
-    data->interH.ystep = 30;
+    data->interH.ystep = TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
     if (data->interH.xstep < 0)
         data->interH.xstep *= -1;
@@ -37,9 +37,9 @@ void downRight_hIntersect(struct s_data *data){
 }
 
 void downLeft_hIntersect(struct s_data *data){
-    data->interH.firstY = (floor(data->p.pos_y / 30) * 30) + 30 + 1;
+    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) + TILE_SIZE + 1;
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) - 1;
-    data->interH.ystep = 30;
+    data->interH.ystep = TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
     if (data->interH.xstep > 0)
         data->interH.xstep *= -1;
@@ -60,9 +60,9 @@ void downLeft_hIntersect(struct s_data *data){
 }
 
 void upLeft_hIntersect(struct s_data *data){
-    data->interH.firstY = (floor(data->p.pos_y / 30) * 30) - 1;
+    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) - 1;
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) - 1;
-    data->interH.ystep = -30;
+    data->interH.ystep = -TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
     if (data->interH.xstep > 0)
         data->interH.xstep *= -1;
@@ -78,9 +78,6 @@ void upLeft_hIntersect(struct s_data *data){
 }
 
 void horizontal_intersection(struct s_data *data){
-
-    printf("ray Angle = %f \n", data->p.rayAngle * (180 / M_PI));
-    printf("rot Angle = %f \n", data->p.rotationAngle * (180 / M_PI));
     data->p.rayAngle =  normalizeAngle(data->p.rayAngle);
     data->p.rotationAngle =  normalizeAngle(data->p.rotationAngle);
     if ((data->p.rayAngle > (270 * (M_PI / 180)) && data->p.rayAngle <= 2 * M_PI))

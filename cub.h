@@ -6,7 +6,7 @@
 /*   By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 01:46:54 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/20 23:24:47 by aalazhar         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:24:01 by aalazhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stddef.h>
+
+#define TILE_SIZE 30
 
 struct s_player{
     double pos_x;
@@ -86,54 +88,19 @@ typedef struct s_map{
     int     i;
 } t_map;
 
-typedef struct s_ray
-{
-    // int xtile;
-    // int ytile;
-    // int xtylestep;
-    // int ytylestep;
-    // double xintercept;
-    // double yintercept;
-    // long xstep;
-    // long ystep;
-    double distance;
-    int  ray_facingdown;
-    int  ray_facingup;
-    int  ray_facinright;
-    int  ray_facinleft;
-    double horizhitx;
-    double horizhity;
-    double vertichitx;
-    double vertichity;
-    char horizwallcontent;
-    char vertiwallcontent;
-    double verticdistance;
-    double horizdistance;
-    int horizwallhit;
-    int vertiwallhit;
-    int wallhit;
-    
-}t_ray;
-
 struct s_data{
-    long double x;
-    long double y;
     int win_width;
     int win_hight;
     void *mlx_ptr;
     void *win_ptr;
+    t_map myMap;
     struct s_img img;
     struct s_img img2;
     struct s_img img3;
     struct s_player p;
-    t_map myMap;
-    t_ray ray;
     struct s_inter interH;
     struct s_inter interV;
 } t_data;
-
-
-
 
 
 char	**ft_free(char **copy, int j);
