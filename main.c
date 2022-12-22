@@ -27,8 +27,6 @@ char    **get_map(char *str)
 }
 
 void init_data(struct s_data *data){
-    // data->x = 0;
-    // data->y = 0;
     data->win_width = data->myMap.mapWidth * TILE_SIZE;
     data->win_hight = data->myMap.mapHeight * TILE_SIZE;
     data->p.moveSpeed = 4;
@@ -37,7 +35,7 @@ void init_data(struct s_data *data){
     data->p.newPy = data->p.pos_y + sin(data->p.rotationAngle) * 30;
     data->p.fieldAngle = 60 * (M_PI / 180);
     data->p.rotationSpeed = 4 * (M_PI / 180);
-    data->p.wallStreapWidth = 10;
+    data->p.wallStreapWidth = 1;
     data->p.raysNumber = data->win_width / data->p.wallStreapWidth;
     data->p.rayAngle = data->p.rotationAngle - (data->p.fieldAngle / 2);
     data->img.hight = TILE_SIZE;
@@ -60,7 +58,7 @@ void drawRays(struct s_data *data){
     data->p.rayAngle = data->p.rotationAngle - (data->p.fieldAngle / 2);
     tmp = data->p.rayAngle * (180 / M_PI);
     limit = data->p.fieldAngle * (180 / M_PI) + tmp; 
-    while (++i < data->win_hight){
+    while (++i < data->p.raysNumber){
         vertical_intersection(data);
         horizontal_intersection(data);
         if (data->p.v_dist > data->p.h_dist){
@@ -72,7 +70,7 @@ void drawRays(struct s_data *data){
             data->p.rayY = data->p.v_rayy;
         }
         DDA(data, 551);
-        data->p.rayAngle += data->p.fieldAngle / data->win_hight;
+        data->p.rayAngle += data->p.fieldAngle / data->p.raysNumber;
     }
 }
 
@@ -124,7 +122,7 @@ int main(int ac, char **av)
     init_data(&data);
     drawMyMap(&data);
     circleDraw(&data);
-    DDA(&data, 1);
+    // DDA(&data, 1);
     drawRays(&data);
     mlx_hook(data.win_ptr, 2, 1L<<0, k_hook, &data);
     mlx_hook(data.win_ptr, 3, 1L<<1, release_k_hook, &data);
