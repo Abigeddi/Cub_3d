@@ -1,7 +1,7 @@
 #include "cub.h"
 
 void upRight_hIntersect(struct s_data *data){
-    data->interH.firstY = floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE - 1;
+    data->interH.firstY = floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE;
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) + 1;
     data->interH.ystep = -TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
@@ -9,7 +9,7 @@ void upRight_hIntersect(struct s_data *data){
         data->interH.xstep *= -1;
     data->interH.xIntersect = data->interH.firstX;
     data->interH.yIntersect = data->interH.firstY;
-    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect, data) == 0){
+    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect - 1, data) == 0){
         data->interH.xIntersect += data->interH.xstep;
         data->interH.yIntersect += data->interH.ystep;
     }
@@ -19,7 +19,7 @@ void upRight_hIntersect(struct s_data *data){
 }
 
 void downRight_hIntersect(struct s_data *data){
-    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) + TILE_SIZE + 1;
+    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) + TILE_SIZE;
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) + 1;
     data->interH.ystep = TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
@@ -27,7 +27,8 @@ void downRight_hIntersect(struct s_data *data){
         data->interH.xstep *= -1;
     data->interH.xIntersect = data->interH.firstX;
     data->interH.yIntersect = data->interH.firstY;
-    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect, data) == 0){
+
+    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect + 1, data) == 0){
         data->interH.xIntersect += data->interH.xstep;
         data->interH.yIntersect += data->interH.ystep;
     }
@@ -37,7 +38,7 @@ void downRight_hIntersect(struct s_data *data){
 }
 
 void downLeft_hIntersect(struct s_data *data){
-    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) + TILE_SIZE + 1;
+    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) + TILE_SIZE;
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) - 1;
     data->interH.ystep = TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
@@ -45,7 +46,7 @@ void downLeft_hIntersect(struct s_data *data){
         data->interH.xstep *= -1;
     data->interH.xIntersect = data->interH.firstX;
     data->interH.yIntersect = data->interH.firstY;
-    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect, data) == 0){
+    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect  + 1, data) == 0){
         data->interH.xIntersect += data->interH.xstep;
         data->interH.yIntersect += data->interH.ystep;
     }
@@ -60,7 +61,7 @@ void downLeft_hIntersect(struct s_data *data){
 }
 
 void upLeft_hIntersect(struct s_data *data){
-    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE) - 1;
+    data->interH.firstY = (floor(data->p.pos_y / TILE_SIZE) * TILE_SIZE);
     data->interH.firstX = data->p.pos_x + ((data->interH.firstY - data->p.pos_y) / tan(data->p.rayAngle)) - 1;
     data->interH.ystep = -TILE_SIZE;
     data->interH.xstep = data->interH.ystep / tan(data->p.rayAngle);
@@ -68,7 +69,7 @@ void upLeft_hIntersect(struct s_data *data){
         data->interH.xstep *= -1;
     data->interH.xIntersect = data->interH.firstX;
     data->interH.yIntersect = data->interH.firstY;
-    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect, data) == 0){
+    while (wallIsHited(data->interH.xIntersect, data->interH.yIntersect - 1, data) == 0){
         data->interH.xIntersect += data->interH.xstep;
         data->interH.yIntersect += data->interH.ystep;
     }

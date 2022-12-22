@@ -14,7 +14,7 @@ double distancebetweenpoints(double x1, double y1, double x2, double y2)
 }
 
 void upRight_vIntersect(struct s_data *data){
-    data->interV.firstX = floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE  + TILE_SIZE + 1;
+    data->interV.firstX = floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE  + TILE_SIZE;
     data->interV.firstY = data->p.pos_y + ((data->interV.firstX - data->p.pos_x) * tan(data->p.rayAngle)) - 1;
     data->interV.xstep = TILE_SIZE;
     data->interV.ystep = data->interV.xstep * tan(data->p.rayAngle);
@@ -22,7 +22,7 @@ void upRight_vIntersect(struct s_data *data){
         data->interV.ystep *= -1;
     data->interV.xIntersect = data->interV.firstX;
     data->interV.yIntersect = data->interV.firstY;
-    while (wallIsHited(data->interV.xIntersect, data->interV.yIntersect, data) == 0){
+    while (wallIsHited(data->interV.xIntersect + 1, data->interV.yIntersect, data) == 0){
         data->interV.xIntersect += data->interV.xstep;
         data->interV.yIntersect += data->interV.ystep;
     }
@@ -32,7 +32,7 @@ void upRight_vIntersect(struct s_data *data){
 }
 
 void downRight_vIntersect(struct s_data *data){
-    data->interV.firstX = (floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE) + TILE_SIZE + 1;
+    data->interV.firstX = (floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE) + TILE_SIZE;
     data->interV.firstY = data->p.pos_y + ((data->interV.firstX - data->p.pos_x) * tan(data->p.rayAngle)) + 1;
     data->interV.xstep = TILE_SIZE;
     data->interV.ystep = data->interV.xstep * tan(data->p.rayAngle);
@@ -40,7 +40,7 @@ void downRight_vIntersect(struct s_data *data){
         data->interV.ystep *= -1;
     data->interV.xIntersect = data->interV.firstX;
     data->interV.yIntersect = data->interV.firstY;
-    while (wallIsHited(data->interV.xIntersect, data->interV.yIntersect, data) == 0){
+    while (wallIsHited(data->interV.xIntersect + 1, data->interV.yIntersect, data) == 0){
         data->interV.xIntersect += data->interV.xstep;
         data->interV.yIntersect += data->interV.ystep;
     }
@@ -49,7 +49,7 @@ void downRight_vIntersect(struct s_data *data){
     data->p.v_rayy = data->interV.yIntersect;
 }
 void downLeft_vIntersect(struct s_data *data){
-    data->interV.firstX = (floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE) - 1;
+    data->interV.firstX = (floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE);
     data->interV.firstY = data->p.pos_y + ((data->interV.firstX - data->p.pos_x) * tan(data->p.rayAngle)) + 1;
     data->interV.xstep = -TILE_SIZE;
     data->interV.ystep = data->interV.xstep * tan(data->p.rayAngle);
@@ -57,7 +57,7 @@ void downLeft_vIntersect(struct s_data *data){
         data->interV.ystep *= -1;
     data->interV.xIntersect = data->interV.firstX;
     data->interV.yIntersect = data->interV.firstY;
-    while (wallIsHited(data->interV.xIntersect, data->interV.yIntersect, data) == 0){
+    while (wallIsHited(data->interV.xIntersect - 1, data->interV.yIntersect, data) == 0){
         data->interV.xIntersect += data->interV.xstep;
         data->interV.yIntersect += data->interV.ystep;
     }
@@ -70,7 +70,7 @@ void downLeft_vIntersect(struct s_data *data){
     printf("v ray y = %f \n", data->interV.yIntersect);
 }
 void upLeft_vIntersect(struct s_data *data){
-    data->interV.firstX = (floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE) - 1;
+    data->interV.firstX = (floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE);
         data->interV.firstY = data->p.pos_y + ((data->interV.firstX - data->p.pos_x) * tan(data->p.rayAngle)) - 1;
         data->interV.xstep = -TILE_SIZE;
         data->interV.ystep = data->interV.xstep * tan(data->p.rayAngle);
@@ -79,7 +79,7 @@ void upLeft_vIntersect(struct s_data *data){
         data->interV.xIntersect = data->interV.firstX;
         data->interV.yIntersect = data->interV.firstY;
 
-        while (wallIsHited(data->interV.xIntersect, data->interV.yIntersect, data) == 0){
+        while (wallIsHited(data->interV.xIntersect - 1, data->interV.yIntersect, data) == 0){
             data->interV.xIntersect += data->interV.xstep;
             data->interV.yIntersect += data->interV.ystep;
         }
