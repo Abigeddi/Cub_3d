@@ -53,11 +53,6 @@ void downLeft_hIntersect(struct s_data *data){
     data->p.h_dist = distancebetweenpoints(data->p.pos_x, data->p.pos_y, data->interH.xIntersect, data->interH.yIntersect);
     data->p.h_rayx = data->interH.xIntersect;
     data->p.h_rayy = data->interH.yIntersect;
-    printf("horizontal -------- \n");
-
-    printf("h ray x = %f \n", data->interH.xIntersect);
-    printf("h ray y = %f \n", data->interH.yIntersect);
-
 }
 
 void upLeft_hIntersect(struct s_data *data){
@@ -81,12 +76,12 @@ void upLeft_hIntersect(struct s_data *data){
 void horizontal_intersection(struct s_data *data){
     data->p.rayAngle =  normalizeAngle(data->p.rayAngle);
     data->p.rotationAngle =  normalizeAngle(data->p.rotationAngle);
-    if ((data->p.rayAngle > (270 * (M_PI / 180)) && data->p.rayAngle <= 2 * M_PI))
+    if ((data->p.rayAngle > (270 * (M_PI / 180)) && data->p.rayAngle < 2 * M_PI))
         upRight_hIntersect(data);
-    else if ((data->p.rayAngle > 0 && data->p.rayAngle <= M_PI / 2))
+    else if ((data->p.rayAngle > 0 && data->p.rayAngle < M_PI / 2))
         downRight_hIntersect(data);
-    else if ((data->p.rayAngle > M_PI / 2 && data->p.rayAngle <= M_PI))
+    else if ((data->p.rayAngle > M_PI / 2 && data->p.rayAngle < M_PI))
         downLeft_hIntersect(data);
-    else if ((data->p.rayAngle > M_PI && data->p.rayAngle <= (3 *(M_PI / 2))))
+    else if ((data->p.rayAngle > M_PI && data->p.rayAngle < (3 *(M_PI / 2))))
         upLeft_hIntersect(data);
 }

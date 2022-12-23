@@ -73,22 +73,6 @@ void horizontal_intersection(struct s_data *data){
     /* get the first intersection point */
     double firstX = 0.0;
     double firstY = 0.0;
-    // int fDown = 0;
-    // int fUp = 0;
-    // int fRight = 0;
-    // int fLeft = 0;
-
-    // if (data->p.rayAngle > 0 && data->p.rayAngle < M_PI)
-    //     fDown = 1;
-    // else
-    //     fUp = 1;
-    
-    // if ((data->p.rayAngle > ((1.5) * M_PI) && data->p.rayAngle < (M_PI * (2))) ||  (data->p.rayAngle > 0 && data->p.rayAngle < (0.5) * M_PI))
-    //     fRight = 1;
-    // else
-    //     fLeft = 1;
-    // if ((data->p.rayAngle * (180 / M_PI)) == 360)
-    //     data->p.rayAngle = 0;
     printf("ray Angle = %f \n", data->p.rayAngle * (180 / M_PI));
     printf("rot Angle = %f \n", data->p.rotationAngle * (180 / M_PI));
     data->p.rayAngle =  normalizeAngle(data->p.rayAngle);
@@ -98,14 +82,11 @@ void horizontal_intersection(struct s_data *data){
         firstY = floor(data->p.pos_y / 30) * 30 - 1;
         firstX = data->p.pos_x + ((firstY - data->p.pos_y) / tan(data->p.rayAngle)) + 1;
         ystep = -30;
-        // if(data->p.rayAngle == 0)
-        //     xstep = 0;
         xstep = ystep / tan(data->p.rayAngle);
         printf("xstep = %f\n", xstep);
         printf("ystep = %f\n", ystep);
         if (xstep < 0)
             xstep *= -1;
-        // ystep *= -1;
         xIntersect = firstX;
         yIntersect = firstY;
 
@@ -196,63 +177,7 @@ void horizontal_intersection(struct s_data *data){
         printf("intercY = %f\n", yIntersect);
     }
     printf("last point : X %f , Y %f\n", data->p.h_rayx, data->p.h_rayy);
-    // firstY = floor(data->p.pos_y / 30) * 30;
-    // // if (data->p.rayAngle > 0 && data->p.rayAngle < M_PI)
-    // if (data->ray.ray_facingdown)
-    //     firstY += 30;
-    // firstX = data->p.pos_x + ((firstY - data->p.pos_y) / tan(data->p.rayAngle));
-    // ystep = 30;
-    // if (data->ray.ray_facingup)
-    //     ystep *= -1;
-    // xstep = ystep / tan(data->p.rayAngle);
-    // // if (data->p.rayAngle > (270 * (M_PI / 180)) && data->p.rayAngle < (90 * (M_PI / 180)))
-    // // if (xstep > 0 && ((data->p.rayAngle > (270 * (M_PI / 180)) && data->p.rayAngle < (360 * (M_PI / 180))) || (data->p.rayAngle > (0 * (M_PI / 180)) && data->p.rayAngle < (90 * (M_PI / 180)))))
-    // if (data->ray.ray_facinright && xstep > 0)
-    //     xstep *= -1;
-    // // if (xstep < 0 && ((data->p.rayAngle > (90 * (M_PI / 180)) && data->p.rayAngle < (180 * (M_PI / 180))) || (data->p.rayAngle > (180 * (M_PI / 180)) && data->p.rayAngle < (270 * (M_PI / 180)))))
-    // if (data->ray.ray_facinleft && xstep < 0)
-    //     xstep *= -1;
 
-
-
-    // if (fDown)
-    // if ((data->p.rayAngle > 0 &&  data->p.rayAngle < M_PI))
-    //     firstY += 30;
-
-    /* find delta-x and delta-y */
-    // ystep = 30;
-    // xstep = ystep / tan(data->p.rayAngle);
-    // xstep *= -1;
-    // printf("xstep = %f\n", xstep);
-    // if (data->p.rayAngle > (M_PI / 2) && data->p.rayAngle < M_PI)
-    //     xstep *= -1;
-    // if (data->p.rayAngle > M_PI && data->p.rayAngle < (3 * (M_PI / 2))){
-    //     xstep *= -1;
-    //     ystep *= -1;
-    // }
-    // else if (data->p.rayAngle > (3 * (M_PI / 2)) && data->p.rayAngle < 2 * M_PI)
-    //     ystep *= -1;
-
-    // if (fUp)
-    //     ystep *= -1;
-
-
-    // if (fLeft && xstep > 0)
-    //     xstep *= -1;
-    // if (fRight && xstep < 0)
-    //     xstep *= -1;
-
-    // xIntersect = firstX;
-    // yIntersect = firstY;
-
-    // while (wallIsHited(xIntersect, yIntersect, data) == 0){
-    //     xIntersect += xstep;
-    //     yIntersect += ystep;
-    // }
-    // // if (wallIsHited(xIntersect, yIntersect, data) == 1)
-    // distance = distancebetweenpoints(data->p.pos_x, data->p.pos_y, xIntersect, yIntersect);
-    // data->ray.horizhitx = xIntersect;
-    // data->ray.horizhity = yIntersect;
     printf("first-x = %f\n", firstX);
     printf("first-Y = %f\n", firstY);
 }
@@ -264,7 +189,6 @@ void vertical_intersection(struct s_data *data){
     double xIntersect;
     double yIntersect;
 
-    // double distance;
     double firstX = 0.0;
     double firstY = 0.0;
     data->p.rayAngle =  normalizeAngle(data->p.rayAngle);
@@ -277,13 +201,9 @@ void vertical_intersection(struct s_data *data){
         xstep = 30;
         ystep = xstep * tan(data->p.rayAngle);
         
-        // if(data->p.rayAngle == 0)
-        //     xstep = 0;
         if (ystep > 0)
             ystep *= -1;
-        // if (xstep < 0)
-        //     xstep *= -1;
-        // ystep *= -1;
+
         xIntersect = firstX;
         yIntersect = firstY;
 
@@ -302,11 +222,10 @@ void vertical_intersection(struct s_data *data){
         firstY = data->p.pos_y + ((firstX - data->p.pos_x) * tan(data->p.rayAngle)) + 1;
         xstep = 30;
         ystep = xstep * tan(data->p.rayAngle);
-        // printf("xstep = %f\n", xstep);
-        // printf("ystep = %f\n", ystep);
+
         if (ystep < 0)
             ystep *= -1;
-        // ystep *= -1;
+
         xIntersect = firstX;
         yIntersect = firstY;
 
@@ -325,8 +244,6 @@ void vertical_intersection(struct s_data *data){
         firstY = data->p.pos_y + ((firstX - data->p.pos_x) * tan(data->p.rayAngle)) + 1;
         xstep = -30;
         ystep = xstep * tan(data->p.rayAngle);
-        // printf("xstep = %f\n", xstep);
-        // printf("ystep = %f\n", ystep);
         if (ystep < 0)
             ystep *= -1;
         xIntersect = firstX;
@@ -352,8 +269,7 @@ void vertical_intersection(struct s_data *data){
         ystep = xstep * tan(data->p.rayAngle);
         if (ystep > 0)
             ystep *= -1;
-        // printf("xstep = %f\n", xstep);
-        // printf("ystep = %f\n", ystep);
+
         xIntersect = firstX;
         yIntersect = firstY;
 
@@ -363,8 +279,7 @@ void vertical_intersection(struct s_data *data){
         }
         data->p.v_rayx = xIntersect;
         data->p.v_rayy = yIntersect;
-        // if (data->p.v_rayx < data->p.pos_x){
-        //     data->p.v_rayx += 30;
+
         // }
         data->p.v_dist = distancebetweenpoints(data->p.pos_x, data->p.pos_y, data->p.v_rayx, data->p.v_rayy);
         // printf("intercX = %f\n", xIntersect);

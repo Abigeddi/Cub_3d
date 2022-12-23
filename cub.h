@@ -6,7 +6,7 @@
 /*   By: aalazhar <aalazhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 01:46:54 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/12/22 00:24:01 by aalazhar         ###   ########.fr       */
+/*   Updated: 2022/12/23 16:54:27 by aalazhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ struct s_player{
     double rayY;
     double h_dist;
     double v_dist;
-    double distance;
     double v_rayx;
     double v_rayy;
     double h_rayx;
     double h_rayy;
+    double *raysDistance;
+    double distanceProjectPlane;
+    double wallStreapHight;
 
 };
 
@@ -88,6 +90,13 @@ typedef struct s_map{
     int     i;
 } t_map;
 
+struct s_rect{
+    double top;
+    double left;
+    double right;
+    double down;
+};
+
 struct s_data{
     int win_width;
     int win_hight;
@@ -100,6 +109,7 @@ struct s_data{
     struct s_player p;
     struct s_inter interH;
     struct s_inter interV;
+    struct s_rect rect;
 } t_data;
 
 

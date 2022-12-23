@@ -64,10 +64,7 @@ void downLeft_vIntersect(struct s_data *data){
     data->p.v_rayx = data->interV.xIntersect;
     data->p.v_rayy = data->interV.yIntersect;
     data->p.v_dist = distancebetweenpoints(data->p.pos_x, data->p.pos_y, data->p.v_rayx, data->p.v_rayy);
-    printf("vertical -------- \n");
 
-    printf("v ray x = %f \n", data->interV.xIntersect);
-    printf("v ray y = %f \n", data->interV.yIntersect);
 }
 void upLeft_vIntersect(struct s_data *data){
     data->interV.firstX = (floor(data->p.pos_x / TILE_SIZE) * TILE_SIZE);
@@ -92,12 +89,12 @@ void vertical_intersection(struct s_data *data){
 
     data->p.rayAngle =  normalizeAngle(data->p.rayAngle);
     data->p.rotationAngle =  normalizeAngle(data->p.rotationAngle);
-    if ((data->p.rayAngle > (270 * (M_PI / 180)) && data->p.rayAngle <= 2 * M_PI))
+    if ((data->p.rayAngle > (270 * (M_PI / 180)) && data->p.rayAngle < 2 * M_PI))
         upRight_vIntersect(data);
-    else if ((data->p.rayAngle > 0 && data->p.rayAngle <= M_PI / 2))
+    else if ((data->p.rayAngle > 0 && data->p.rayAngle < M_PI / 2))
         downRight_vIntersect(data);
-    else if ((data->p.rayAngle > M_PI / 2 && data->p.rayAngle <= M_PI))
+    else if ((data->p.rayAngle > M_PI / 2 && data->p.rayAngle < M_PI))
         downLeft_vIntersect(data);
-    else if ((data->p.rayAngle > M_PI && data->p.rayAngle <= (3 *(M_PI / 2))))
+    else if ((data->p.rayAngle > M_PI && data->p.rayAngle < (3 *(M_PI / 2))))
         upLeft_vIntersect(data);
 }
