@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_func.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iel-bakk < iel-bakk@student.1337.ma>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/31 18:33:01 by iel-bakk          #+#    #+#             */
+/*   Updated: 2023/01/31 18:33:29 by iel-bakk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 int	ft_atoi(const char *str)
@@ -47,7 +59,7 @@ void	ft_putendl_fd(char *s, int fd)
 	write (fd, "\n", 1);
 }
 
-int	ft_strncmp(const char *s1,const char *s2, int n)
+int	ft_strncmp(const char *s1, const char *s2, int n)
 {
 	int	x;
 

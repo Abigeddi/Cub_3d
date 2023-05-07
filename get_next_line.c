@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abigeddi <abigeddi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-bakk < iel-bakk@student.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 13:52:32 by abigeddi          #+#    #+#             */
-/*   Updated: 2022/11/30 02:01:28 by abigeddi         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:19:34 by iel-bakk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
- int BUFFER_SIZE = 1 ;
+
 int	find_new_line(char *remain)
 {
 	int	i;
